@@ -1,0 +1,70 @@
+CREATE TABLE `CarPart` (
+  `CarSerialNumber` string,
+  `PartNumber` string,
+  `PartName` string,
+  `Quantity` int,
+  `Cost` decimal
+);
+
+CREATE TABLE `ServiceTicket` (
+  `TicketId` string PRIMARY KEY,
+  `CarSerialNumber` string,
+  `CustomerId` string,
+  `ServiceDate` date
+);
+
+CREATE TABLE `Car` (
+  `SerialNumber` string PRIMARY KEY,
+  `Model` string,
+  `Make` string,
+  `Year` int,
+  `Type` string,
+  `Mileage` int
+);
+
+CREATE TABLE `Mechanic` (
+  `MechanicId` string PRIMARY KEY,
+  `Name` string,
+  `Certification` string
+);
+
+CREATE TABLE `Salesperson` (
+  `SalespersonId` string PRIMARY KEY,
+  `Name` string,
+  `DealerId` string
+);
+
+CREATE TABLE `Dealer` (
+  `DealerId` string PRIMARY KEY,
+  `Name` string,
+  `Address` string
+);
+
+CREATE TABLE `Invoice` (
+  `InvoiceId` string PRIMARY KEY,
+  `CarSerialNumber` string,
+  `SalespersonId` string,
+  `CustomerId` string,
+  `SaleDate` date,
+  `Amount` decimal
+);
+
+CREATE TABLE `CarMechanic` (
+  `CarSerialNumber` string,
+  `MechanicId` string
+);
+
+CREATE TABLE `Customer` (
+  `CustomerId` string PRIMARY KEY,
+  `Name` string,
+  `Phone` string,
+  `Email` string
+);
+
+
+INSERT INTO Customer (CustomerId, Name, Phone, Email)
+VALUES ('1057893522', 'Omar B', 'Phone Number', 'email@gmail.com')
+
+
+INSERT INTO Car (SerialNumber, Model, Make, Year, Type, Mileage)
+VALUES ('24H589W7352I4G5974G25Y', 'Camry', 'Toyota', 2017, 'Sedan', 16000);
