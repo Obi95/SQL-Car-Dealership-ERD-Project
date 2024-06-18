@@ -3,14 +3,17 @@ CREATE TABLE `CarPart` (
   `PartNumber` string,
   `PartName` string,
   `Quantity` int,
-  `Cost` decimal
+  `Cost` decimal,
+  FOREIGN KEY (`CarSerialNumber`) REFERENCES `Car`(`SerialNumber`)
 );
 
 CREATE TABLE `ServiceTicket` (
   `TicketId` string PRIMARY KEY,
   `CarSerialNumber` string,
   `CustomerId` string,
-  `ServiceDate` date
+  `ServiceDate` date,
+  FOREIGN KEY (`CarSerialNumber`) REFERENCES `Car`(`SerialNumber`),
+  FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`)
 );
 
 CREATE TABLE `Car` (
@@ -31,7 +34,8 @@ CREATE TABLE `Mechanic` (
 CREATE TABLE `Salesperson` (
   `SalespersonId` string PRIMARY KEY,
   `Name` string,
-  `DealerId` string
+  `DealerId` string,
+  FOREIGN KEY (`DealerId`) REFERENCES `Dealer`(`DealerId`)
 );
 
 CREATE TABLE `Dealer` (
@@ -46,12 +50,17 @@ CREATE TABLE `Invoice` (
   `SalespersonId` string,
   `CustomerId` string,
   `SaleDate` date,
-  `Amount` decimal
+  `Amount` decimal,
+  FOREIGN KEY (`CarSerialNumber`) REFERENCES `Car`(`SerialNumber`),
+  FOREIGN KEY (`SalespersonId`) REFERENCES `Salesperson`(`SalespersonId`),
+  FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`)
 );
 
 CREATE TABLE `CarMechanic` (
   `CarSerialNumber` string,
-  `MechanicId` string
+  `MechanicId` string,
+  FOREIGN KEY (`CarSerialNumber`) REFERENCES `Car`(`SerialNumber`),
+  FOREIGN KEY (`MechanicId`) REFERENCES `Mechanic`(`MechanicId`)
 );
 
 CREATE TABLE `Customer` (
@@ -61,10 +70,9 @@ CREATE TABLE `Customer` (
   `Email` string
 );
 
-
+-- Insert sample data
 INSERT INTO Customer (CustomerId, Name, Phone, Email)
-VALUES ('1057893522', 'Omar B', 'Phone Number', 'email@gmail.com')
-
+VALUES ('1057893522', 'Omar B', 'Phone Number', 'email@gmail.com');
 
 INSERT INTO Car (SerialNumber, Model, Make, Year, Type, Mileage)
 VALUES ('24H589W7352I4G5974G25Y', 'Camry', 'Toyota', 2017, 'Sedan', 16000);
